@@ -2,8 +2,11 @@
 __author__ = 'florije'
 
 from flask import Flask, render_template
+from flask.ext.bootstrap import Bootstrap
 
 app = Flask(__name__)
+
+bootstrap = Bootstrap(app)
 
 
 @app.route('/index')
@@ -39,7 +42,8 @@ class User(object):
 def user(name):
     user = User()
     comments = [Comment('1'), Comment('2'), Comment('3')]
-    return render_template('user.html', name=name, user=user, comments=comments)
+    # return render_template('user.html', name=name, user=user, comments=comments)
+    return render_template('user_bt.html', name=name)
 
 if __name__ == '__main__':
     app.run(debug=True)
