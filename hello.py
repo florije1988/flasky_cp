@@ -8,7 +8,17 @@ app = Flask(__name__)
 
 @app.route('/index')
 def index():
-    return render_template('index.html')
+    mydict = {'key': 'fuboqing'}
+    mylist = [1, 2, 3, 4]
+    myintvar = 2
+    myobj = MyObj()
+    return render_template('index.html', mydict=mydict, mylist=mylist, myintvar=myintvar, myobj=myobj)
+
+
+class MyObj(object):
+
+    def somemethod(self):
+        return 'somemethod'
 
 
 @app.route('/user/<name>')
