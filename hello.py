@@ -43,7 +43,8 @@ def user(name):
     user = User()
     comments = [Comment('1'), Comment('2'), Comment('3')]
     # return render_template('user.html', name=name, user=user, comments=comments)
-    return render_template('user_bt.html', name=name)
+    # return render_template('user_bt.html', name=name)
+    return render_template('user_cp.html', name=name)
 
 
 @app.errorhandler(404)
