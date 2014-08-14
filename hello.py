@@ -6,7 +6,12 @@ from flask.ext.bootstrap import Bootstrap
 from flask.ext.moment import Moment
 from datetime import datetime
 
+from flask.ext.wtf import Form
+from wtforms import StringField, SubmitField
+from wtforms.validators import DataRequired
+
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'fuboqing'
 
 bootstrap = Bootstrap(app)
 moment = Moment(app)
@@ -63,6 +68,11 @@ def internal_server_error(e):
 @app.route('/')
 def index():
     return render_template('index_cp.html', current_time=datetime.utcnow())
+
+
+class NameForm(Form):
+    name = StringField('What is your name?', validators=[DataRequired()])
+    submit = SubmitField('Submit')
 
 if __name__ == '__main__':
     app.run(debug=True)
