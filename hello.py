@@ -69,7 +69,7 @@ class Comment(object):
         return "I am comment with content: %s" % self.content
 
 
-class User(object):
+class User_Cp(object):
 
     def __repr__(self):
         return "I am User!"
@@ -77,7 +77,7 @@ class User(object):
 
 @app.route('/user/<name>')
 def user(name):
-    user = User()
+    user = User_Cp()
     comments = [Comment('1'), Comment('2'), Comment('3')]
     # return render_template('user.html', name=name, user=user, comments=comments)
     # return render_template('user_bt.html', name=name)
