@@ -12,7 +12,10 @@ from flask.ext.wtf import Form
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 
+from flask.ext.script import Manager
+
 app = Flask(__name__)
+manager = Manager(app)
 app.config['SECRET_KEY'] = 'fuboqing'
 
 bootstrap = Bootstrap(app)
@@ -135,4 +138,6 @@ class NameForm(Form):
     submit = SubmitField('Submit')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # app.run(debug=True)
+    app.debug = True
+    manager.run()
