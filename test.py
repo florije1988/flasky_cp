@@ -19,7 +19,9 @@ if __name__ == '__main__':
     # dicts = {'1': 1, '2': 2}
     # print sorted(dicts.iteritems(), key=lambda dicts: dicts[1], reverse=True)
 
-    testfunction = decorate(myfunction)
-    print testfunction
+    # testfunction = decorate(myfunction)
+    # print testfunction
+    #
+    # print testfunction("hello")
 
-    print testfunction("hello")
+    print '<Role {name}>'.format(name='fuboqing')

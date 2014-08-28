@@ -36,7 +36,7 @@ class Role(db.Model):
     users = db.relationship('User', backref='role')
 
     def __repr__(self):
-        return '<Role {name}>'.format(self.name)
+        return '<Role {name}>'.format(name=self.name)
 
 
 class User(db.Model):
@@ -46,7 +46,7 @@ class User(db.Model):
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
 
     def __repr__(self):
-        return '<User {username}>'.format(self.username)
+        return '<User {username}>'.format(username=self.username)
 
 
 # @app.route('/index')
