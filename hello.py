@@ -16,10 +16,21 @@ from flask.ext.script import Manager
 from flask.ext.script import Shell
 
 from flask.ext.migrate import Migrate, MigrateCommand
+import os
+
+from flask.ext.mail import Mail
 
 app = Flask(__name__)
 manager = Manager(app)
 app.config['SECRET_KEY'] = 'fuboqing'
+
+app.config['MAIL_SERVER'] = 'smtp.googlemail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME')
+app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')
+
+mail = Mail(app)
 
 bootstrap = Bootstrap(app)
 moment = Moment(app)
