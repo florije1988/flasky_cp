@@ -21,6 +21,8 @@ import os
 from flask.ext.mail import Mail
 from flask.ext.mail import Message
 
+from threading import Thread
+
 app = Flask(__name__)
 manager = Manager(app)
 app.config['SECRET_KEY'] = 'fuboqing'
@@ -187,7 +189,7 @@ def index():
         session['name'] = form.name.data
         form.name.data = ''
         return redirect(url_for('index'))
-    return render_template('index.html', form=form, name=session.get('name'),
+    return render_template('index_mp.html', form=form, name=session.get('name'),
                            known=session.get('known', False))
 
 
@@ -209,12 +211,20 @@ def send_email(to, subject, template, **kwargs):
                   sender=app.config['FLASKY_MAIL_SENDER'], recipients=[to])
     msg.body = render_template(template + '.txt', **kwargs)
     msg.html = render_template(template + '.html', **kwargs)
-    mail.send(msg)
+    # mail.send(msg)
+    thr = Thread(target=send_async_email, args=[app, msg])
+    thr.start()
+    return thr
 
 
 class NameForm(Form):
     name = StringField('What is your name?', validators=[DataRequired()])
     submit = SubmitField('Submit')
+
+
+def send_async_email(app, msg):
+    with app.app_context():
+        mail.send(msg)
 
 
 if __name__ == '__main__':
